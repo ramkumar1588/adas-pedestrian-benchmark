@@ -1,0 +1,62 @@
+# ── Model weights (large binary files — download via Ultralytics on first run) ──
+*.pt
+*.pth
+*.onnx
+*.engine
+*.trt
+*.bin
+
+# ── TensorRT calibration artefacts ────────────────────────────────────────────
+*_calib.txt
+*_calib.yaml
+*.cache
+
+# ── Dataset and output directories ────────────────────────────────────────────
+# Do not commit raw ZOD data or pipeline output — these are local only.
+data/
+subset_*/
+full_val/
+predictions/
+models/
+
+# ── Report documents ──────────────────────────────────────────────────────────
+*.docx
+*.pdf
+*.xlsx
+
+# ── Python artefacts ──────────────────────────────────────────────────────────
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.Python
+*.egg-info/
+dist/
+build/
+*.egg
+.eggs/
+
+# ── Virtual environments ──────────────────────────────────────────────────────
+.venv/
+venv/
+env/
+ENV/
+
+# ── IDE and tool settings ─────────────────────────────────────────────────────
+.vscode/
+.idea/
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
+
+# ── Claude Code project files ─────────────────────────────────────────────────
+.claude/
+
+# ── Logs ──────────────────────────────────────────────────────────────────────
+*.log
+pipeline_run*.log
+
+# ── Jupyter ───────────────────────────────────────────────────────────────────
+.ipynb_checkpoints/
+*.ipynb

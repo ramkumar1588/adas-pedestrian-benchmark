@@ -1,0 +1,73 @@
+# ─────────────────────────────────────────────────────────────────────────────
+# ZOD Inference Pipeline — config.yaml
+#
+# Copy this file and update the paths under [paths] to match your local
+# ZOD dataset location and desired output directories before running.
+#
+# All paths accept absolute or relative values.
+# Forward slashes work on all platforms (including Windows).
+# ─────────────────────────────────────────────────────────────────────────────
+
+paths:
+  # ── ZOD dataset (output of your web-browser or CLI download) ──────────────
+  dataset_root:     "/path/to/zod/frames/infos"       # trainval JSON + per-frame metadata.json
+  images_root:      "/path/to/zod/frames/images"       # camera_front_blur images
+  annotations_root: "/path/to/zod/frames/annotations"  # object_detection.json files
+
+  # ── Pipeline outputs ───────────────────────────────────────────────────────
+  subset_dir: "/path/to/output/subset_1250"         # create_subset.py or build_full_val.py writes here
+  output_dir: "/path/to/output/subset_1250/predictions"  # inference + eval results
+  model_dir:  "/path/to/output/models"              # .pt weights + .engine files
+
+# ── MODELS ────────────────────────────────────────────────────────────────────
+# Set enabled: true for models you want to run.
+# Weights are downloaded automatically from Ultralytics on first run.
+models:
+  yolov8n:
+    enabled: true
+    weight:  yolov8n.pt
+    type:    yolo
+
+  yolov8s:
+    enabled: true
+    weight:  yolov8s.pt
+    type:    yolo
+
+  yolov8m:
+    enabled: true
+    weight:  yolov8m.pt
+    type:    yolo
+
+  yolov8l:
+    enabled: true
+    weight:  yolov8l.pt
+    type:    yolo
+
+  rtdetr-r50:
+    enabled: true
+    weight:  rtdetr-l.pt
+    type:    rtdetr
+
+  rtdetr-r101:
+    enabled: true
+    weight:  rtdetr-x.pt
+    type:    rtdetr
+
+# ── GLOBAL INFERENCE SETTINGS ─────────────────────────────────────────────────
+inference:
+  device:     cuda    # use "cpu" if no GPU available
+  imgsz:      1280
+  conf:       0.25
+  iou:        0.45
+  person_cls: 0       # COCO class index for "person"
+
+# ── PIPELINE STAGES ───────────────────────────────────────────────────────────
+stages:
+  inference: true
+  evaluate:  true
+  report:    true
+
+# ── WARMUP ────────────────────────────────────────────────────────────────────
+warmup:
+  enabled: true
+  runs:    3
